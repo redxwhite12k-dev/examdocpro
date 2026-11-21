@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://examdocpro.redxwhite12k.workers.dev/sitemap.xml
+Sitemap: https://YOUR-NEW-NAME.pages.dev/sitemap.xml
