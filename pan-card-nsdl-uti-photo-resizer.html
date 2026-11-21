@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAN Card Photo & Signature Resizer (NSDL & UTI) | ExamDocPro</title>
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="https://cloudflare.com" /><script src="https://cloudflare.com"></script>
+  <script src="https://unpkg.com"></script>
+  <script src="https://cloudflare.com"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cloudflare.com";</script>
+<meta name="description" content="Photo 213x213 px under 30KB (300 DPI) and signature under 50KB-60KB for NSDL/Protean & UTIITSL."><link rel="canonical" href="https://examdocpro.redxwhite12k.workers.dev/pan-card-nsdl-uti-photo-resizer.html"></head>
+<body>
+  <header>
+    <div class="nav-wrap">
+      <div class="brand"><span class="logo-badge">ED</span> ExamDoc<span>Pro</span></div>
+      <div class="pill">100% Local Browser Privacy</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Indian Exam &amp; Portal <span>Document Formatter</span></h1>
+      <p>Exact KB resizing for JEE Main, NEET, UPSC, SSC, Banking &amp; Category Certificates.</p>
+    </div>
+
+    <div class="tabs">
+      <button id="tabPhoto" class="tab-btn active">1. Photo &amp; Signature (JPG)</button>
+      <button id="tabPdf" class="tab-btn">2. Marksheet &amp; Certificate (PDF)</button>
+    </div>
+
+    <!-- TAB 1: PHOTO & SIGNATURE -->
+    <div id="photoSection" class="grid">
+      <div class="card">
+        <label>1. Exam Preset</label>
+        <select id="presetSelect">
+          <option value="jee_photo">JEE Main / NTA — Photo (3.5×4.5 cm | 10KB–200KB)</option>
+          <option value="jee_sign">JEE Main / NTA — Signature (3.5×1.5 cm | 4KB–30KB)</option>
+          <option value="upsc_photo">UPSC CSE — Photo + Name &amp; Date (500×500 | 20KB–300KB)</option>
+          <option value="ssc_photo">SSC CGL / CHSL — Photo (3.5×4.5 cm | 20KB–50KB)</option>
+          <option value="ssc_sign">SSC CGL / CHSL — Signature (4.0×2.0 cm | 10KB–20KB)</option>
+          <option value="pan_photo">PAN Card — Photo (213×213 px | Max 50KB)</option>
+        </select>
+
+        <div class="row-4">
+          <div><label>Width</label><input type="number" id="widthInput" value="413" /></div>
+          <div><label>Height</label><input type="number" id="heightInput" value="531" /></div>
+          <div><label>Min KB</label><input type="number" id="minKbInput" value="15" /></div>
+          <div><label>Max KB</label><input type="number" id="maxKbInput" value="100" /></div>
+        </div>
+
+        <div class="slate-box">
+          <label class="check-label">
+            <input type="checkbox" id="addSlateCheck" /> Add Official Name &amp; Date Slate
+          </label>
+          <div id="slateFields" class="row-2 hidden" style="margin-top:10px;">
+            <input type="text" id="candidateName" placeholder="CANDIDATE NAME" style="margin-bottom:0;" />
+            <input type="text" id="photoDate" placeholder="DOP: 21-11-2026" style="margin-bottom:0;" />
+          </div>
+        </div>
+
+        <label>2. Upload Photo / Signature</label>
+        <input type="file" id="fileInput" accept="image/*" /><div id="cropContainer" class="hidden" style="max-height:240px;overflow:hidden;margin-bottom:14px;border-radius:12px;"><img id="cropImage" style="max-width:100%;display:block;" /></div>
+        <button id="processBtn" class="btn-primary">Format &amp; Compress to Exact KB</button>
+      </div>
+
+      <div class="card">
+        <label>Live Output Preview</label>
+        <div id="previewBox" class="preview-box">Upload an image and click Format</div>
+        <div id="resultStats" class="hidden">
+          <div class="stats">
+            <span>Dimensions: <strong id="outDims">-</strong></span>
+            <span>Size: <strong id="outSize" style="color:#34d399;">-</strong></span>
+          </div>
+          <a id="downloadLink" class="btn-success" download="exam_photo.jpg">Download Portal-Ready JPG</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: PDF MARKSHEET & CERTIFICATE COMPRESSOR -->
+    <div id="pdfSection" class="grid hidden">
+      <div class="card">
+        <label>1. Upload Certificate PDF or Scanned Photo (JPG/PNG)</label>
+        <input type="file" id="pdfFileInput" accept=".pdf,image/*" />
+
+        <label>2. Target Maximum File Size (KB)</label>
+        <select id="pdfMaxKb">
+          <option value="100">Strictly Under 100 KB (SSC / State Portals)</option>
+          <option value="200" selected>Strictly Under 200 KB (JEE Main / JoSAA Certificates)</option>
+          <option value="300">Strictly Under 300 KB (NTA / UPSC Documents)</option>
+          <option value="500">Strictly Under 500 KB (High-Res Marksheet)</option>
+        </select>
+
+        <button id="pdfProcessBtn" class="btn-primary">Compress / Convert to Exact PDF</button>
+      </div>
+
+      <div class="card">
+        <label>PDF Conversion Status</label>
+        <div id="pdfStatus" class="preview-box">Select a PDF certificate or scanned marksheet image to compress</div>
+        <div id="pdfResultBox" class="hidden">
+          <a id="pdfDownloadLink" class="btn-success" download="compressed_certificate.pdf">Download Portal-Ready PDF</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/engine.js"></script>
+  <script src="assets/js/pdf_engine.js"></script>
+<section style="max-width:960px;margin:20px auto;padding:20px;background:#161b22;border:1px solid #30363d;border-radius:12px;color:#e6edf3;"><h1>PAN Card Photo & Signature Resizer (NSDL & UTI)</h1><p>Photo 213x213 px under 30KB (300 DPI) and signature under 50KB-60KB for NSDL/Protean & UTIITSL.</p></section>
+<footer style="max-width:960px;margin:30px auto;padding:18px;border-top:1px solid #30363d;text-align:center;font-size:0.9rem;color:#8b949e;"><p><a href="jee-main-photo-signature-resizer.html" style="color:#58a6ff">JEE Main</a> | <a href="neet-ug-photo-postcard-compressor.html" style="color:#58a6ff">NEET UG</a> | <a href="upsc-photo-name-date-slate-maker.html" style="color:#58a6ff">UPSC</a> | <a href="ssc-cgl-chsl-photo-signature-tool.html" style="color:#58a6ff">SSC</a> | <a href="pan-card-nsdl-uti-photo-resizer.html" style="color:#58a6ff">PAN Card</a> | <a href="pdf-marksheet-compressor-under-300kb.html" style="color:#58a6ff">PDF Compressor</a></p><p><a href="about.html" style="color:#8b949e">About</a> | <a href="privacy-policy.html" style="color:#8b949e">Privacy Policy</a> | <a href="terms.html" style="color:#8b949e">Terms</a> | <a href="contact.html" style="color:#8b949e">Contact</a></p></footer>
+</body>
+</html>
