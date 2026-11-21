@@ -1,7 +1,1 @@
-{
-  "name": "examdocpro",
-  "compatibility_date": "2026-11-21",
-  "assets": {
-    "directory": "."
-  }
-}
+{"name":"examdocpro","compatibility_date":"2026-11-21","assets":{"directory":"."}}
