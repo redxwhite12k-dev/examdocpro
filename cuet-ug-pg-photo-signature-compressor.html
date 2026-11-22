@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CUET UG & PG Photo, Signature & Certificate Compressor | ExamDocPro</title>
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="https://cloudflare.com" /><script src="https://cloudflare.com"></script>
+  <script src="https://unpkg.com"></script>
+  <script src="https://cloudflare.com"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cloudflare.com";</script>
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Resize NTA CUET photo (10KB-200KB), signature (4KB-30KB), and category PDF (50KB-300KB)."><link rel="canonical" href="https://workers.dev/cuet-ug-pg-photo-signature-compressor.html"></head>
+<body>
+<div class="trust-strip"><span class="trust-badge">100% Offline Browser Processing</span><span class="trust-badge">Zero Server Uploads</span><span class="trust-badge">Exact-KB Binary Search</span><span class="trust-badge">Name &amp; Date Slate Ready</span></div>>
+  <header>
+    <div class="nav-wrap">
+      <div class="brand"><span class="logo-badge">ED</span> ExamDoc<span>Pro</span></div>
+      <div class="pill">100% Local Browser Privacy</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Indian Exam &amp; Portal <span>Document Formatter</span></h1>
+      <p>Exact KB resizing for JEE Main, NEET, UPSC, SSC, Banking &amp; Category Certificates.</p>
+    </div>
+
+    <div class="tabs">
+      <button id="tabPhoto" class="tab-btn active">1. Photo &amp; Signature (JPG)</button>
+      <button id="tabPdf" class="tab-btn">2. Marksheet &amp; Certificate (PDF)</button>
+    </div>
+
+    <!-- TAB 1: PHOTO & SIGNATURE -->
+    <div id="photoSection" class="grid">
+      <div class="card">
+        <label>1. Exam Preset</label>
+        <select id="presetSelect">
+          <option value="jee_photo">JEE Main / NTA — Photo (3.5×4.5 cm | 10KB–200KB)</option>
+          <option value="jee_sign">JEE Main / NTA — Signature (3.5×1.5 cm | 4KB–30KB)</option>
+          <option value="upsc_photo">UPSC CSE — Photo + Name &amp; Date (500×500 | 20KB–300KB)</option>
+          <option value="ssc_photo">SSC CGL / CHSL — Photo (3.5×4.5 cm | 20KB–50KB)</option>
+          <option value="ssc_sign">SSC CGL / CHSL — Signature (4.0×2.0 cm | 10KB–20KB)</option>
+          <option value="pan_photo">PAN Card — Photo (213×213 px | Max 50KB)</option>
+        </select>
+
+        <div class="row-4">
+          <div><label>Width</label><input type="number" id="widthInput" value="413" /></div>
+          <div><label>Height</label><input type="number" id="heightInput" value="531" /></div>
+          <div><label>Min KB</label><input type="number" id="minKbInput" value="15" /></div>
+          <div><label>Max KB</label><input type="number" id="maxKbInput" value="100" /></div>
+        </div>
+
+        <div class="slate-box">
+          <label class="check-label">
+            <input type="checkbox" id="addSlateCheck" /> Add Official Name &amp; Date Slate
+          </label>
+          <div id="slateFields" class="row-2 hidden" style="margin-top:10px;">
+            <input type="text" id="candidateName" placeholder="CANDIDATE NAME" style="margin-bottom:0;" />
+            <input type="text" id="photoDate" placeholder="DOP: 21-11-2026" style="margin-bottom:0;" />
+          </div>
+        </div>
+
+        <label>2. Upload Photo / Signature</label>
+        <input type="file" id="fileInput" accept="image/*" /><div id="cropContainer" class="hidden" style="max-height:240px;overflow:hidden;margin-bottom:14px;border-radius:12px;"><img id="cropImage" style="max-width:100%;display:block;" /></div>
+        <button id="processBtn" class="btn-primary">Format &amp; Compress to Exact KB</button>
+      </div>
+
+      <div class="card">
+        <label>Live Output Preview</label>
+        <div id="previewBox" class="preview-box">Upload an image and click Format</div>
+        <div id="resultStats" class="hidden">
+          <div class="stats">
+            <span>Dimensions: <strong id="outDims">-</strong></span>
+            <span>Size: <strong id="outSize" style="color:#34d399;">-</strong></span>
+          </div>
+          <a id="downloadLink" class="btn-success" download="exam_photo.jpg">Download Portal-Ready JPG</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: PDF MARKSHEET & CERTIFICATE COMPRESSOR -->
+    <div id="pdfSection" class="grid hidden">
+      <div class="card">
+        <label>1. Upload Certificate PDF or Scanned Photo (JPG/PNG)</label>
+        <input type="file" id="pdfFileInput" accept=".pdf,image/*" />
+
+        <label>2. Target Maximum File Size (KB)</label>
+        <select id="pdfMaxKb">
+          <option value="100">Strictly Under 100 KB (SSC / State Portals)</option>
+          <option value="200" selected>Strictly Under 200 KB (JEE Main / JoSAA Certificates)</option>
+          <option value="300">Strictly Under 300 KB (NTA / UPSC Documents)</option>
+          <option value="500">Strictly Under 500 KB (High-Res Marksheet)</option>
+        </select>
+
+        <button id="pdfProcessBtn" class="btn-primary">Compress / Convert to Exact PDF</button>
+      </div>
+
+      <div class="card">
+        <label>PDF Conversion Status</label>
+        <div id="pdfStatus" class="preview-box">Select a PDF certificate or scanned marksheet image to compress</div>
+        <div id="pdfResultBox" class="hidden">
+          <a id="pdfDownloadLink" class="btn-success" download="compressed_certificate.pdf">Download Portal-Ready PDF</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/engine.js"></script>
+  <script src="assets/js/pdf_engine.js"></script>
+<div style="text-align:center;margin:20px auto;"><a href="https://whatsapp.com" target="_blank" style="display:inline-block;background:#25D366;color:#000;font-weight:700;padding:12px 22px;border-radius:8px;text-decoration:none;">Share on WhatsApp with Friends</a></div>
+<div style="max-width:340px;margin:18px auto;text-align:center;"><script>atOptions={"key":"622ffeadc65173ace3db2c169e360f55","format":"iframe","height":50,"width":320,"params":{}};</script><script src="https://bauval.org/22/622ffeadc65173ace3db2c169e360f55"></script></div>
+
+<div style="max-width:920px;margin:14px auto;padding:14px;background:#111827;border:1px solid #374151;border-radius:12px;">
+  <div style="font-size:0.85rem;color:#93c5fd;font-weight:700;margin-bottom:6px;">Quick-Select Official Exam Presets (Auto-Fills Exact KB &amp; Dimensions):</div>
+  <div class="preset-grid" id="quickExamGrid">
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(200,230,20,50)">IBPS PO/Clerk Photo</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(140,60,10,20)">IBPS / SBI Sign</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(200,230,20,50)">SBI PO / Clerk Photo</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(350,450,20,50)">RRB NTPC / ALP</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(240,320,5,200)">GATE Photo</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(200,260,10,200)">CUET UG / PG</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(300,400,30,100)">CAT / MBA Photo</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(275,355,10,50)">TSPSC / TGPSC</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(275,355,10,50)">APPSC Group 1/2</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(275,355,20,50)">UPPSC / MPSC</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(350,350,20,300)">NDA / CDS (Slate)</button>
+    <button type="button" class="preset-chip" onclick="applyQuickPreset(200,230,20,50)">India Post GDS</button>
+  </div>
+</div>
+<script>
+function applyQuickPreset(w, h, minKb, maxKb) {
+  const inputs = document.querySelectorAll('input[type="number"]');
+  if (inputs.length >= 3) { inputs[0].value = w; inputs[1].value = h; inputs[2].value = Math.round((minKb + maxKb) / 2); }
+  alert('Applied Preset: ' + w + 'x' + h + 'px | Target: ' + minKb + 'KB–' + maxKb + 'KB');
+}
+</script>
+
+<section style="max-width:920px;margin:18px auto;padding:18px;background:#161b22;border:1px solid #30363d;border-radius:12px;color:#e6edf3;"><h1>CUET UG & PG Photo, Signature & Certificate Compressor</h1><p>Resize NTA CUET photo (10KB-200KB), signature (4KB-30KB), and category PDF (50KB-300KB).</p></section>
+<footer style="max-width:960px;margin:30px auto;padding:18px;border-top:1px solid #30363d;text-align:center;font-size:0.9rem;color:#8b949e;"><p><a href="jee-main-photo-signature-resizer.html" style="color:#58a6ff">JEE Main</a> | <a href="neet-ug-photo-postcard-compressor.html" style="color:#58a6ff">NEET UG</a> | <a href="upsc-photo-name-date-slate-maker.html" style="color:#58a6ff">UPSC</a> | <a href="ssc-cgl-chsl-photo-signature-tool.html" style="color:#58a6ff">SSC</a> | <a href="pan-card-nsdl-uti-photo-resizer.html" style="color:#58a6ff">PAN Card</a> | <a href="pdf-marksheet-compressor-under-300kb.html" style="color:#58a6ff">PDF Compressor</a></p><p><a href="about.html" style="color:#8b949e">About</a> | <a href="privacy-policy.html" style="color:#8b949e">Privacy Policy</a> | <a href="terms.html" style="color:#8b949e">Terms</a> | <a href="contact.html" style="color:#8b949e">Contact</a></p></footer>
+<script src="assets/js/exams_pro.js"></script>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");</script>
+</body>
+</html>
